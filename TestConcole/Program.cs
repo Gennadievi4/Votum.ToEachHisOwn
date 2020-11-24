@@ -6,7 +6,13 @@ namespace TestConcole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            DerivedClass der = new DerivedClass();
+            der.Method();
+
+            BaseClass bas = der;
+            bas.Method();
+
+            Console.ReadKey();
         }
     }
 }
