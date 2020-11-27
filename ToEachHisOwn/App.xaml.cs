@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using ToEachHisOwn.Services;
 using ToEachHisOwn.ViewModels;
 
 namespace ToEachHisOwn
@@ -33,10 +34,9 @@ namespace ToEachHisOwn
             __Host = null;
         }
 
-        public static void ConfigureServies(HostBuilderContext host, IServiceCollection services)
-        {
-            services.AddSingleton<MainWindowViewModel>();
-        }
+        public static void ConfigureServies(HostBuilderContext host, IServiceCollection services) => services
+            .ViewModelsRegistrator()
+            .RegisterService();
 
         public static string CurrentDirectory => IsDesignMode ? Path.GetDirectoryName(GetSourceCodePath()) : Environment.CurrentDirectory;
 
