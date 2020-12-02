@@ -4,12 +4,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:l="clr-namespace:ToEachHisOwn.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
         mc:Ignorable="d"
-        Title="{Binding Title}"
-        Height="450" 
-        Width="800">
-    <Grid>
         
+        Title="{Binding Title}"
+        Height="450"
+        Width="800"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid>
+        <Button Width="100">
+            <Button.ContentTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Click"/>
+                        <materialDesign:PackIcon Kind="AboutCircle" Margin="10, 0, 0, 0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </Button.ContentTemplate>
+        </Button>
     </Grid>
 </Window>
