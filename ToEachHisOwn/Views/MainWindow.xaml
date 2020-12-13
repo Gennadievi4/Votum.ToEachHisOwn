@@ -16,16 +16,11 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid>
-        <Button Width="100">
-            <Button.ContentTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Click"/>
-                        <materialDesign:PackIcon Kind="AboutCircle" Margin="10, 0, 0, 0"/>
-                    </StackPanel>
-                </DataTemplate>
-            </Button.ContentTemplate>
-        </Button>
-    </Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл" Height="20"/>
+            <MenuItem Header="О нас" Height="20"/>
+        </Menu>
+        <Button/>
+    </DockPanel>
 </Window>

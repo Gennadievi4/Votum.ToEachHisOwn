@@ -3,10 +3,219 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialdisgn="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:TestWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        Title="Каждому своё!" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+    <DockPanel LastChildFill="False">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл" Height="20">
+                <MenuItem Header="Закрыть">
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="О нас" Height="20"/>
+        </Menu>
+        <ToolBarTray DockPanel.Dock="Top" Background="Transparent">
+            <ToolBar Background="Transparent">
+                <ComboBox Width="150" 
+                          materialdisgn:HintAssist.Hint="Выберите базу">
+                    <ComboBoxItem Content="Таблица умножения"/>
+                    <ComboBoxItem Content="1-й класс"/>
+                    <ComboBoxItem Content="2-й класс"/>
+                    <ComboBoxItem Content="3-й класс"/>
+                    <ComboBoxItem Content="4-й класс"/>
+                    <ComboBoxItem Content="5-й класс"/>
+                    <ComboBoxItem Content="6-й класс"/>
+                    <ComboBoxItem Content="7-й класс"/>
+                    <ComboBoxItem Content="8-й класс"/>
+                    <ComboBoxItem Content="9-й класс"/>
+                    <ComboBoxItem Content="10-й класс"/>
+                    <ComboBoxItem Content="11-й класс"/>
+                </ComboBox>
+                <Button ToolTip="Добавить базу" Padding="0" Height="20" Width="30">
+                    <materialdisgn:PackIcon Kind="Add" Height="18" Width="18"/>
+                </Button>
+                <Button ToolTip="Удалить базу" Padding="0" Height="20" Width="30">
+                    <materialdisgn:PackIcon Kind="Delete" />
+                </Button>
+            </ToolBar>
+            <ToolBar Band="0" ToolBar.OverflowMode="AsNeeded" Background="Transparent">
+                <Button Padding="0" ToolTip="Показать ошибку на экране пульта">
+                    <materialdisgn:PackIcon Kind="SmartphoneText"/>
+                </Button>
+                <Button Padding="0" ToolTip="Показать рейтинг на экране пульта">
+                    <materialdisgn:PackIcon Kind="SmartphoneInformation"/>
+                </Button>
+                <Button Padding="0" ToolTip="Ограничить время ответа">
+                    <materialdisgn:PackIcon Kind="TimerSand"/>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <Grid DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <GroupBox Header="Участники игры"
+                      Style="{DynamicResource MaterialDesignGroupBox}"
+                      Margin="10"
+                      materialdisgn:ShadowAssist.ShadowDepth="Depth3"
+                      BorderThickness="0">
+                <DataGrid ItemsSource="{Binding Students}" 
+                      AutoGenerateColumns="False" 
+                      IsReadOnly="True"
+                      HorizontalScrollBarVisibility="Disabled"
+                      AlternationCount="1"
+                      AlternatingRowBackground="LightGray">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="10"/>
+                            <Setter Property="SeparatorVisibility" Value="Collapsed"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0 1 0 1"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="№ пульта и № комплекта пультов" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding RemoteId}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Кол-во отвеченных вопросов" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Questions}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Кол-во ошибок" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Errors}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Кол-во просроченных ответов" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Answers}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="% выполнения теста" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Wins}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="% правильных ответов" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Right}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Суммарное время" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Time}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Рейтинг участника" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Rating}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Рейтинг общий участника" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding RatingAll}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+            <!--<ListView Margin="0, 5, 0, 5"
+                      Grid.Row="0"
+                      ItemsSource="{Binding Students}">
+                <ListView.Style>
+                    <Style TargetType="ListView">
+                        <Setter Property="BorderThickness" Value="2"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                    </Style>
+                </ListView.Style>
+                <ListView.View>
+                    <GridView>
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="Width" Value="auto"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                            <Border 
+                                                    Background="Transparent"
+                                                    Padding="20">
+                                                <TextBlock Text="{TemplateBinding Content}"
+                                                           Width="{TemplateBinding Width}"
+                                                           TextAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
+                        <GridViewColumn Header="№ пульта и № комплекта пультов">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Answers}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Кол-во отвеченных вопросов"
+                                        DisplayMemberBinding="{Binding Questions}"/>
+                        <GridViewColumn Header="Кол-во ошибок"
+                                        DisplayMemberBinding="{Binding Errors}"/>
+                        <GridViewColumn Header="Кол-во просроченных ответов"
+                                        DisplayMemberBinding="{Binding Answers}"/>
+                        <GridViewColumn Header="% выполнения теста"
+                                        DisplayMemberBinding="{Binding Wins}"/>
+                        <GridViewColumn Header="% правильных ответов"
+                                        DisplayMemberBinding="{Binding Right}"/>
+                        <GridViewColumn Header="Суммарное время"
+                                        DisplayMemberBinding="{Binding Time}"/>
+                        <GridViewColumn Header="Рейтинг участника"
+                                        DisplayMemberBinding="{Binding Rating}"/>
+                        <GridViewColumn Header="Рейтинг общий участника"
+                                        DisplayMemberBinding="{Binding RatingAll}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>-->
+        </Grid>
+        <StatusBar DockPanel.Dock="Bottom" Background="LightGray">
+            <StatusBarItem HorizontalAlignment="Center">
+                <TextBlock>Кол-во участников: 4</TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+    </DockPanel>
 </Window>
