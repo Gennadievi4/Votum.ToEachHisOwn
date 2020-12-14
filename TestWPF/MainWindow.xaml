@@ -18,7 +18,7 @@
         <local:MainWindowViewModel/>
     </Window.DataContext>
     <DockPanel LastChildFill="False">
-        <Menu DockPanel.Dock="Top">
+        <Menu DockPanel.Dock="Top" IsMainMenu="True">
             <MenuItem Header="Файл" Height="20">
                 <MenuItem Header="Закрыть">
                 </MenuItem>
@@ -63,8 +63,8 @@
         </ToolBarTray>
         <Grid DockPanel.Dock="Top">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <GroupBox Header="Участники игры"
                       Style="{DynamicResource MaterialDesignGroupBox}"
@@ -72,16 +72,17 @@
                       materialdisgn:ShadowAssist.ShadowDepth="Depth3"
                       BorderThickness="0">
                 <DataGrid ItemsSource="{Binding Students}" 
-                      AutoGenerateColumns="False" 
-                      IsReadOnly="True"
-                      HorizontalScrollBarVisibility="Disabled"
-                      AlternationCount="1"
-                      AlternatingRowBackground="LightGray">
+                          AutoGenerateColumns="False" 
+                          IsReadOnly="True"
+                          HorizontalScrollBarVisibility="Disabled"
+                          AlternationCount="1"
+                          AlternatingRowBackground="LightGray"
+                          Height="500">
                     <DataGrid.Resources>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
                             <Setter Property="Padding" Value="10"/>
-                            <Setter Property="SeparatorVisibility" Value="Collapsed"/>
+                            <!--<Setter Property="SeparatorVisibility" Value="Collapsed"/>-->
                             <Setter Property="BorderBrush" Value="Transparent"/>
                             <Setter Property="BorderThickness" Value="0 1 0 1"/>
                         </Style>
@@ -104,14 +105,14 @@
                         <DataGridTemplateColumn Header="Кол-во ошибок" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Errors}" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Errors}" HorizontalAlignment="Center" Foreground="Red"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="Кол-во просроченных ответов" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Answers}" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Answers}" HorizontalAlignment="Center" Foreground="Blue"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -152,6 +153,46 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+            </GroupBox>
+            <GroupBox Grid.Row="1"
+                      Header="Архив участника №1-8681"
+                      Margin="10"
+                      materialdisgn:ShadowAssist.ShadowDepth="Depth3"
+                      BorderThickness="0"
+                      Height="400">
+                <DockPanel LastChildFill="False" 
+                           Height="300"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top">
+                    <ListView Width="auto" 
+                              ItemsSource="{Binding Errors}"
+                              DockPanel.Dock="Top">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Неправильный ответ" DisplayMemberBinding="{Binding Error1}"/>
+                                <GridViewColumn Header="Просроченный ответ" DisplayMemberBinding="{Binding Error2}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button VerticalAlignment="Top" 
+                            Width="270" 
+                            Height="40"
+                            DockPanel.Dock="Bottom">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Выгрузить архив участника игры"/>
+                                <materialdisgn:PackIcon 
+                                    Kind="ContentSaveAlert" 
+                                    Margin="5 0 0 0"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </DockPanel>
             </GroupBox>
             <!--<ListView Margin="0, 5, 0, 5"
                       Grid.Row="0"
