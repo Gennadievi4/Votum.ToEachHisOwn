@@ -18,13 +18,19 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="Q" Command="{Binding ClossApp}"/>
+    </Window.InputBindings>
     <DockPanel LastChildFill="False">
-        <Menu DockPanel.Dock="Top">
+        <Menu DockPanel.Dock="Top" 
+              IsMainMenu="True">
             <MenuItem Header="Файл" Height="30">
                 <MenuItem 
                     Icon="{materialDesign:PackIcon Kind=ExitToApp}"
                     Header="Закрыть"
-                    InputGestureText="Ctrl+Q">
+                    InputGestureText="Ctrl+Q"
+                    Command="{Binding ClossApp}"
+                    Height="30">
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="О нас" Height="30"/>

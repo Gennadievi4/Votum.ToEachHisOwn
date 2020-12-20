@@ -73,80 +73,86 @@
                       Margin="10"
                       materialdisgn:ShadowAssist.ShadowDepth="Depth3"
                       BorderThickness="0">
-                <DataGrid ItemsSource="{Binding Students}" 
-                          AutoGenerateColumns="False" 
+                <DataGrid ItemsSource="{Binding Students}"
                           IsReadOnly="True"
                           HorizontalScrollBarVisibility="Disabled"
                           AlternationCount="1"
                           AlternatingRowBackground="LightGray"
-                          Height="500">
+                          Height="500"
+                          HeadersVisibility="Column"
+                          AutoGenerateColumns="False"
+                          materialdisgn:DataGridAssist.CellPadding="0"
+                          materialdisgn:DataGridAssist.ColumnHeaderPadding="0"
+                          materialdisgn:DataGridAssist.EnableEditBoxAssist="False"
+                          ColumnWidth="*">
                     <DataGrid.Resources>
-                        <Style TargetType="DataGridColumnHeader">
+                        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                            <Setter Property="Padding" Value="10"/>
-                            <!--<Setter Property="SeparatorVisibility" Value="Collapsed"/>-->
                             <Setter Property="BorderBrush" Value="Transparent"/>
-                            <Setter Property="BorderThickness" Value="0 1 0 1"/>
+                        </Style>
+                        <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0"/>
                         </Style>
                     </DataGrid.Resources>
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="№ пульта и № комплекта пультов" Width="*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding RemoteId}" HorizontalAlignment="Center"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Кол-во отвеченных вопросов" Width="*">
+                        <materialdisgn:DataGridTextColumn Header="№ пульта и № комплекта пультов" Binding="{Binding RemoteId}">
+                            <materialdisgn:DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                </Style>
+                            </materialdisgn:DataGridTextColumn.ElementStyle>
+                        </materialdisgn:DataGridTextColumn>
+                        <DataGridTemplateColumn Header="Кол-во отвеченных вопросов" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Questions}" HorizontalAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Кол-во ошибок" Width="*">
+                        <DataGridTemplateColumn Header="Кол-во ошибок">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Errors}" HorizontalAlignment="Center" Foreground="Red"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Кол-во просроченных ответов" Width="*">
+                        <DataGridTemplateColumn Header="Кол-во просроченных ответов">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Answers}" HorizontalAlignment="Center" Foreground="Blue"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="% выполнения теста" Width="*">
+                        <DataGridTemplateColumn Header="% выполнения теста">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Wins}" HorizontalAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="% правильных ответов" Width="*">
+                        <DataGridTemplateColumn Header="% правильных ответов">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Right}" HorizontalAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Суммарное время" Width="*">
+                        <DataGridTemplateColumn Header="Суммарное время">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Time}" HorizontalAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Рейтинг участника" Width="*">
+                        <DataGridTemplateColumn Header="Рейтинг участника">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Rating}" HorizontalAlignment="Center"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Рейтинг общий участника" Width="*">
+                        <DataGridTemplateColumn Header="Рейтинг общий участника">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding RatingAll}" HorizontalAlignment="Center"/>
@@ -161,7 +167,7 @@
                       Margin="10"
                       materialdisgn:ShadowAssist.ShadowDepth="Depth3"
                       BorderThickness="0"
-                      Height="400">
+                      >
                 <DockPanel LastChildFill="False" 
                            Height="300"
                            HorizontalAlignment="Center"
