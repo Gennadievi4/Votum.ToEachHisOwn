@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ToEachHisOwn.Properties {
+namespace TestConcole.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ToEachHisOwn.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ToEachHisOwn.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TestConcole.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -147,9 +147,9 @@ namespace ToEachHisOwn.Properties {
         ///  &quot;Aллитepaция&quot;,
         ///   [остаток строки не уместился]&quot;;.
         /// </summary>
-        internal static string _10йкласс {
+        internal static string _10_й_класс {
             get {
-                return ResourceManager.GetString("10йкласс", resourceCulture);
+                return ResourceManager.GetString("10-й класс", resourceCulture);
             }
         }
         

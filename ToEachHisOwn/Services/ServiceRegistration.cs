@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using ToEachHisOwn.Services.Interfaces;
 
 namespace ToEachHisOwn.Services
 {
@@ -6,6 +7,7 @@ namespace ToEachHisOwn.Services
     {
         internal static IServiceCollection RegisterService(this IServiceCollection services) 
         {
+            services.AddSingleton<IJsonData, InJsonDataServices>();
             return services;
         }
     }

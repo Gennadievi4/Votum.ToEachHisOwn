@@ -13,6 +13,7 @@
 
         Height="450"
         Width="800"
+        SizeToContent="WidthAndHeight"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
@@ -24,7 +25,8 @@
     <DockPanel LastChildFill="False">
         <Menu DockPanel.Dock="Top" 
               IsMainMenu="True">
-            <MenuItem Header="Файл" Height="30">
+            <MenuItem Header="Файл" 
+                      Height="30">
                 <MenuItem 
                     Icon="{materialDesign:PackIcon Kind=ExitToApp}"
                     Header="Закрыть"
@@ -33,8 +35,52 @@
                     Height="30">
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="О нас" Height="30"/>
+            <MenuItem Header="О нас" 
+                      Height="30"/>
         </Menu>
-        <Button DockPanel.Dock="Top"/>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <ComboBox materialDesign:HintAssist.Hint="Выберите базу:"
+                          ItemsSource="{Binding Data.Keys}">
+                </ComboBox>
+                <Button Style="{StaticResource StandartButtonStyle}">
+                    <Button.Content>
+                        <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
+                                                 Kind="Add"
+                                                 ToolTip="Добавить базу"/>
+                    </Button.Content>
+                </Button>
+                <Button Style="{StaticResource StandartButtonStyle}">
+                    <Button.Content>
+                        <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
+                                                 Kind="Delete"
+                                                 ToolTip="Удалить базу"/>
+                    </Button.Content>
+                </Button>
+                <ToolBar>
+                    <Button Style="{StaticResource StandartButtonStyle}">
+                        <Button.Content>
+                            <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
+                                                     Kind="SmartphoneText"
+                                                     ToolTip="Показывать на экране пульта ошибку"/>
+                        </Button.Content>
+                    </Button>
+                    <Button Style="{StaticResource StandartButtonStyle}">
+                        <Button.Content>
+                            <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
+                                                     Kind="SmartphoneInformation"
+                                                     ToolTip="Показать рейтинг на экране пульта"/>
+                        </Button.Content>
+                    </Button>
+                    <Button Style="{StaticResource StandartButtonStyle}">
+                        <Button.Content>
+                            <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
+                                                     Kind="TimerSand"
+                                                     ToolTip="Ограничить время ответа"/>
+                        </Button.Content>
+                    </Button>
+                </ToolBar>
+            </ToolBar>
+        </ToolBarTray>
     </DockPanel>
 </Window>

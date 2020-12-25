@@ -1,7 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
+using TestConcole.Properties;
 
 namespace TestConcole
 {
@@ -49,7 +55,24 @@ namespace TestConcole
 
         static void Main(string[] args)
         {
-            DeserializeObjectJson(ConvertTxtToJson);
+            //DeserializeObjectJson(ConvertTxtToJson);
+
+            var assembly = Assembly.GetExecutingAssembly();
+
+            var res = Resources.ResourceManager.GetResourceSet(CultureInfo.CurrentCulture, true, true);
+
+            foreach (DictionaryEntry item in res)
+            {
+                //if (item.Value is string str)
+                //    Console.WriteLine($"{item.Key}:{JsonConvert.DeserializeObject(str)}");
+                Console.WriteLine($"{item.Key}");
+            }
+
+            //ResourceManager resourceManager = new ResourceManager("Program", assembly);
+
+            //var str = resourceManager.BaseName;
+
+            //Console.WriteLine(resourceManager);
 
             Console.WriteLine("That was all!");
 
