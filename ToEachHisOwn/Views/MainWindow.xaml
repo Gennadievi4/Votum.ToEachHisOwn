@@ -24,7 +24,8 @@
     </Window.InputBindings>
     <DockPanel LastChildFill="False">
         <Menu DockPanel.Dock="Top" 
-              IsMainMenu="True">
+              IsMainMenu="True"
+              Name="MainMenu">
             <MenuItem Header="Файл" 
                       Height="30">
                 <MenuItem 
@@ -35,52 +36,66 @@
                     Height="30">
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="О нас" 
-                      Height="30"/>
+            <MenuItem Header="Справка" 
+                      Height="30">
+                <MenuItem Header="О программе &quot;Каждому своё!&quot;"
+                          Height="30">
+                </MenuItem>
+            </MenuItem>
         </Menu>
         <ToolBarTray DockPanel.Dock="Top">
-            <ToolBar>
+            <ToolBar Band="0" 
+                     BandIndex="0">
                 <ComboBox materialDesign:HintAssist.Hint="Выберите базу:"
                           ItemsSource="{Binding Data.Keys}">
                 </ComboBox>
-                <Button Style="{StaticResource StandartButtonStyle}">
+                <Button Style="{StaticResource StandartButtonStyle}"
+                        ToolTip="Добавить базу">
                     <Button.Content>
                         <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
-                                                 Kind="Add"
-                                                 ToolTip="Добавить базу"/>
+                                                 Kind="Add"/>
                     </Button.Content>
                 </Button>
-                <Button Style="{StaticResource StandartButtonStyle}">
+                <Button Style="{StaticResource StandartButtonStyle}"
+                        ToolTip="Удалить базу">
                     <Button.Content>
                         <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
-                                                 Kind="Delete"
-                                                 ToolTip="Удалить базу"/>
+                                                 Kind="Delete"/>
                     </Button.Content>
                 </Button>
-                <ToolBar>
-                    <Button Style="{StaticResource StandartButtonStyle}">
-                        <Button.Content>
-                            <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
-                                                     Kind="SmartphoneText"
-                                                     ToolTip="Показывать на экране пульта ошибку"/>
-                        </Button.Content>
-                    </Button>
-                    <Button Style="{StaticResource StandartButtonStyle}">
-                        <Button.Content>
-                            <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
-                                                     Kind="SmartphoneInformation"
-                                                     ToolTip="Показать рейтинг на экране пульта"/>
-                        </Button.Content>
-                    </Button>
-                    <Button Style="{StaticResource StandartButtonStyle}">
-                        <Button.Content>
-                            <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
-                                                     Kind="TimerSand"
-                                                     ToolTip="Ограничить время ответа"/>
-                        </Button.Content>
-                    </Button>
-                </ToolBar>
+            </ToolBar>
+            <ToolBar Band="0"
+                     BandIndex="1">
+                <Button Style="{StaticResource StandartButtonStyle}"
+                        ToolTip="Показывать на экране пульта ошибку">
+                    <Button.Content>
+                        <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
+                                                 Kind="SmartphoneText"/>
+                    </Button.Content>
+                </Button>
+                <Button Style="{StaticResource StandartButtonStyle}"
+                        ToolTip="Показать рейтинг на экране пульта">
+                    <Button.Content>
+                        <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
+                                                 Kind="SmartphoneInformation"/>
+                    </Button.Content>
+                </Button>
+                <Button Style="{StaticResource StandartButtonStyle}"
+                        ToolTip="Ограничить время ответа">
+                    <Button.Content>
+                        <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
+                                                 Kind="TimerSand"/>
+                    </Button.Content>
+                </Button>
             </ToolBar>
         </ToolBarTray>
+        <UniformGrid Rows="2" Width="{Binding ActualWidth, ElementName=MainMenu}">
+            <GroupBox Header="Участники игры">
+                <TextBlock Text="Тестовый текст"/>
+            </GroupBox>
+            <GroupBox Header="Участник игры №1">
+                <TextBlock Text="Тестовый текст"/>
+            </GroupBox>
+        </UniformGrid>
     </DockPanel>
 </Window>
