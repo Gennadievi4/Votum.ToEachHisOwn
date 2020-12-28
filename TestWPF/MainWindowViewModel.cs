@@ -64,6 +64,8 @@ namespace TestWPF
             
         }
 
+        public string TestData { get; set; } = "Тестовые данные!";
+
         public class Erros
         {
             public string Error1 { get; set; }

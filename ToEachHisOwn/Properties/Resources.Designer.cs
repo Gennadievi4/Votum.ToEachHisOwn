@@ -147,9 +147,9 @@ namespace ToEachHisOwn.Properties {
         ///  &quot;Aллитepaция&quot;,
         ///   [остаток строки не уместился]&quot;;.
         /// </summary>
-        internal static string _10йкласс {
+        internal static string _10_йкласс {
             get {
-                return ResourceManager.GetString("10йкласс", resourceCulture);
+                return ResourceManager.GetString("10-йкласс", resourceCulture);
             }
         }
         

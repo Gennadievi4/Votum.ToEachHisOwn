@@ -46,7 +46,8 @@
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar Band="0" 
                      BandIndex="0">
-                <ComboBox materialDesign:HintAssist.Hint="Выберите базу:"
+                <ComboBox Style="{StaticResource ComboWithMaterialStyle}"
+                          materialDesign:HintAssist.Hint="Выберите базу:"
                           ItemsSource="{Binding Data.Keys}">
                 </ComboBox>
                 <Button Style="{StaticResource StandartButtonStyle}"
@@ -89,7 +90,14 @@
                 </Button>
             </ToolBar>
         </ToolBarTray>
-        <UniformGrid Rows="2" Width="{Binding ActualWidth, ElementName=MainMenu}">
+        <StatusBar DockPanel.Dock="Bottom"
+                   Height="30"
+                   Background="White"
+                   HorizontalAlignment="Center">
+            <TextBlock Text="Статус бар"/>
+        </StatusBar>
+        <UniformGrid Rows="2" 
+                     Width="{Binding ActualWidth, ElementName=MainMenu}">
             <GroupBox Header="Участники игры">
                 <TextBlock Text="Тестовый текст"/>
             </GroupBox>

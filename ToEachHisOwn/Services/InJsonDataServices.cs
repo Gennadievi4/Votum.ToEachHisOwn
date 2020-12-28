@@ -13,7 +13,7 @@ namespace ToEachHisOwn.Services
     {
         private IDictionary<string, string[]> _DataDict = new Dictionary<string, string[]>();
 
-        ///<summary>Достаёт ведрённые ресурсы из приложения, сортирует их по ключу.</summary>  
+        ///<summary>Достаёт внедрённые ресурсы из приложения, сортирует их по ключу.</summary>  
         public IDictionary<string, string[]> GetDbFromExe()
         {
             var res = Resources.ResourceManager.GetResourceSet(CultureInfo.CurrentCulture, true, true);

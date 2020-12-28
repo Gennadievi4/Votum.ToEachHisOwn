@@ -28,23 +28,30 @@
             <MenuItem Header="О нас" Height="20"/>
         </Menu>
         <ToolBarTray DockPanel.Dock="Top" Background="Transparent">
-            <ToolBar Background="Transparent">
-                <ComboBox Width="150" 
-                          materialdisgn:HintAssist.Hint="Выберите базу">
-                    <ComboBoxItem Content="Таблица умножения"/>
-                    <ComboBoxItem Content="1-й класс"/>
-                    <ComboBoxItem Content="2-й класс"/>
-                    <ComboBoxItem Content="3-й класс"/>
-                    <ComboBoxItem Content="4-й класс"/>
-                    <ComboBoxItem Content="5-й класс"/>
-                    <ComboBoxItem Content="6-й класс"/>
-                    <ComboBoxItem Content="7-й класс"/>
-                    <ComboBoxItem Content="8-й класс"/>
-                    <ComboBoxItem Content="9-й класс"/>
-                    <ComboBoxItem Content="10-й класс"/>
-                    <ComboBoxItem Content="11-й класс"/>
-                </ComboBox>
-                <Button ToolTip="Добавить базу" Padding="0" Height="20" Width="30">
+            <ToolBar Background="Transparent" Height="100">
+                <Canvas ClipToBounds="False">
+                    <ComboBox Width="auto" 
+                          materialdisgn:HintAssist.Hint="Выберите базу"
+                          Style="{DynamicResource MaterialDesignFloatingHintComboBox}"
+                          IsEditable="True">
+                        <ComboBoxItem Content="Таблица умножения"/>
+                        <ComboBoxItem Content="1-й класс"/>
+                        <ComboBoxItem Content="2-й класс"/>
+                        <ComboBoxItem Content="3-й класс"/>
+                        <ComboBoxItem Content="4-й класс"/>
+                        <ComboBoxItem Content="5-й класс"/>
+                        <ComboBoxItem Content="6-й класс"/>
+                        <ComboBoxItem Content="7-й класс"/>
+                        <ComboBoxItem Content="8-й класс"/>
+                        <ComboBoxItem Content="9-й класс"/>
+                        <ComboBoxItem Content="10-й класс"/>
+                        <ComboBoxItem Content="11-й класс"/>
+                    </ComboBox>
+                    <Button Width="20"
+                            Height="20"
+                            Canvas.Left="100"/>
+                </Canvas>
+                <Button ToolTip="Добавить базу" Margin="150, 0, 0, 0" Padding="0" Height="20" Width="30">
                     <materialdisgn:PackIcon Kind="Add" Height="18" Width="18"/>
                 </Button>
                 <Button ToolTip="Удалить базу" Padding="0" Height="20" Width="30">
@@ -70,7 +77,7 @@
             </Grid.RowDefinitions>
             <GroupBox Header="Участники игры"
                       Style="{DynamicResource MaterialDesignGroupBox}"
-                      Margin="10"
+                      Margin="16"
                       materialdisgn:ShadowAssist.ShadowDepth="Depth3"
                       BorderThickness="0">
                 <DataGrid ItemsSource="{Binding Students}"
@@ -162,46 +169,51 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </GroupBox>
-            <GroupBox Grid.Row="1"
+            <Border Grid.Row="1"
+                    materialdisgn:ShadowAssist.ShadowDepth="Depth3"
+                    Margin="16, 0, 16, 0"
+                    BorderBrush="White"
+                    BorderThickness="1">
+                <GroupBox
                       Header="Архив участника №1-8681"
                       Margin="10"
-                      materialdisgn:ShadowAssist.ShadowDepth="Depth3"
-                      BorderThickness="0"
-                      >
-                <DockPanel LastChildFill="False" 
-                           Height="300"
+                      BorderThickness="0">
+                    <DockPanel LastChildFill="False" 
+                           Height="390"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Top">
-                    <ListView Width="auto" 
+                        <ListView Width="auto" 
                               ItemsSource="{Binding Errors}"
                               DockPanel.Dock="Top">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Неправильный ответ" DisplayMemberBinding="{Binding Error1}"/>
-                                <GridViewColumn Header="Просроченный ответ" DisplayMemberBinding="{Binding Error2}"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                    <Button VerticalAlignment="Top" 
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Неправильный ответ" DisplayMemberBinding="{Binding Error1}"/>
+                                    <GridViewColumn Header="Просроченный ответ" DisplayMemberBinding="{Binding Error2}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Button VerticalAlignment="Top" 
                             Width="270" 
                             Height="40"
                             DockPanel.Dock="Bottom">
-                        <Button.Content>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Выгрузить архив участника игры"/>
-                                <materialdisgn:PackIcon 
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Выгрузить архив участника игры"/>
+                                    <materialdisgn:PackIcon 
                                     Kind="ContentSaveAlert" 
                                     Margin="5 0 0 0"/>
-                            </StackPanel>
-                        </Button.Content>
-                    </Button>
-                </DockPanel>
-            </GroupBox>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                    </DockPanel>
+                </GroupBox>
+            </Border>
+            
             <!--<ListView Margin="0, 5, 0, 5"
                       Grid.Row="0"
                       ItemsSource="{Binding Students}">

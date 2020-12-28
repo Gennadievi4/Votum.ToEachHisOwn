@@ -9,5 +9,7 @@ namespace ToEachHisOwn.Services.Interfaces
 
         ///<summary>Метод получает названия статических баз данных, хранящихся в exe приложения.</summary>
         //ICollection<string> GetNameOfDbFromExe();
+
+
     }
 }
