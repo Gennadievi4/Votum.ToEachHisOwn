@@ -21,6 +21,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}">
     <Window.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="Q" Command="{Binding ClossApp}"/>
+        <KeyBinding Modifiers="Ctrl" Key="O" Command="{Binding OpenFile}"/>
     </Window.InputBindings>
     <DockPanel LastChildFill="False">
         <Menu DockPanel.Dock="Top" 
@@ -28,7 +29,13 @@
               Name="MainMenu">
             <MenuItem Header="Файл" 
                       Height="30">
-                <MenuItem 
+                <MenuItem Icon="{materialDesign:PackIcon Kind=OpenInApp}"
+                          Header="Открыть"
+                          InputGestureText="Ctrl+O"
+                          Command="{Binding OpenFile}"
+                          Height="30">
+                </MenuItem>
+                <MenuItem
                     Icon="{materialDesign:PackIcon Kind=ExitToApp}"
                     Header="Закрыть"
                     InputGestureText="Ctrl+Q"
@@ -48,17 +55,21 @@
                      BandIndex="0">
                 <ComboBox Style="{StaticResource ComboWithMaterialStyle}"
                           materialDesign:HintAssist.Hint="Выберите базу:"
-                          ItemsSource="{Binding Data.Keys}">
+                          ItemsSource="{Binding Data.Keys}"
+                          SelectedValue="{Binding SelectedComboBoxString, Mode=TwoWay}">
                 </ComboBox>
                 <Button Style="{StaticResource StandartButtonStyle}"
-                        ToolTip="Добавить базу">
+                        ToolTip="Добавить базу"
+                        Command="{Binding OpenFile}">
                     <Button.Content>
                         <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
                                                  Kind="Add"/>
                     </Button.Content>
                 </Button>
                 <Button Style="{StaticResource StandartButtonStyle}"
-                        ToolTip="Удалить базу">
+                        ToolTip="Удалить базу"
+                        Command="{Binding DeleteBaseFromApp}"
+                        CommandParameter="{Binding SelectedComboBoxString, Mode=TwoWay}">
                     <Button.Content>
                         <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
                                                  Kind="Delete"/>

@@ -231,8 +231,10 @@
     <Compile Include="Models\Remote.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Services\InJsonDataServices.cs" />
-    <Compile Include="Services\Interfaces\IJsonData.cs" />
+    <Compile Include="Services\Interfaces\IJsonDataServices.cs" />
+    <Compile Include="Services\Interfaces\IDialogServices.cs" />
     <Compile Include="Services\ServiceRegistration.cs" />
+    <Compile Include="Services\WindowsUserDialogsService.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />

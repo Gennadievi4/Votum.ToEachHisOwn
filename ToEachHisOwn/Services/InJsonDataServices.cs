@@ -1,17 +1,20 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using ToEachHisOwn.Properties;
 using ToEachHisOwn.Services.Interfaces;
 
 namespace ToEachHisOwn.Services
 {
-    public class InJsonDataServices : IJsonData
+    public class InJsonDataServices : IJsonDataServices
     {
         private IDictionary<string, string[]> _DataDict = new Dictionary<string, string[]>();
+
 
         ///<summary>Достаёт внедрённые ресурсы из приложения, сортирует их по ключу.</summary>  
         public IDictionary<string, string[]> GetDbFromExe()
@@ -22,8 +25,8 @@ namespace ToEachHisOwn.Services
             {
                 if (item.Value is string str)
                 {
-                    JArray desValue = (JArray)JsonConvert.DeserializeObject(str);
-                    _DataDict.Add(item.Key.ToString(), desValue.ToObject<string[]>());
+                    var desValue = JsonConvert.DeserializeObject<string[]>(str);
+                    _DataDict.Add(item.Key.ToString(), desValue);
                 }
             }
 
@@ -40,6 +43,27 @@ namespace ToEachHisOwn.Services
             //    ? num.ToString().PadLeft(2, '0')
             //    : x.Key)
             //    .ToDictionary(x => x.Key, x => x.Value);
+        }
+
+        ///<summary>Открывает указанный файл десериализуя его в json</summary>
+        public IDictionary<string, string[]> Open(string filename, string filenameWithoutExstension)
+        {
+            var DesSer = JsonConvert.DeserializeObject<string[]>(File.ReadAllText(filename));
+
+            _DataDict.Clear();
+            _DataDict.Add(filenameWithoutExstension, DesSer);
+            _DataDict = GetDbFromExe();
+
+            return _DataDict;
+        }
+        public IDictionary<string, string[]> Delete(string key)
+        {
+            _DataDict.Remove(key);
+
+            return _DataDict.OrderBy(x => int.TryParse(x.Key.Split(new char[] { '-' }, 2)[0], out int num)
+                ? num.ToString().PadLeft(2, '0')
+                : x.Key)
+                .ToDictionary(x => x.Key, x => x.Value);
         }
     }
 }

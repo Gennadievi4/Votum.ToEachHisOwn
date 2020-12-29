@@ -7,7 +7,8 @@ namespace ToEachHisOwn.Services
     {
         internal static IServiceCollection RegisterService(this IServiceCollection services) 
         {
-            services.AddSingleton<IJsonData, InJsonDataServices>();
+            services.AddSingleton<IJsonDataServices, InJsonDataServices>();
+            services.AddSingleton<IDialogServices, WindowsUserDialogsService>();
             return services;
         }
     }
