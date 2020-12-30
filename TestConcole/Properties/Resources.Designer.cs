@@ -105,9 +105,9 @@ namespace TestConcole.Properties {
         ///  &quot;Ё&quot;,
         ///   [остаток строки не уместился]&quot;;.
         /// </summary>
-        internal static string _1_й_класс {
+        internal static string _1_й_класс_1_ {
             get {
-                return ResourceManager.GetString("1-й класс", resourceCulture);
+                return ResourceManager.GetString("1-й класс(1)", resourceCulture);
             }
         }
         
@@ -239,9 +239,9 @@ namespace TestConcole.Properties {
         ///  &quot;Дeжypный&quot;,
         ///  &quot;Дepe [остаток строки не уместился]&quot;;.
         /// </summary>
-        internal static string _2_й_класс {
+        internal static string _2_й_класс_2_ {
             get {
-                return ResourceManager.GetString("2-й класс", resourceCulture);
+                return ResourceManager.GetString("2-й класс(2)", resourceCulture);
             }
         }
         

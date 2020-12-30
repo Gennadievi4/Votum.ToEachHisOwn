@@ -4,6 +4,8 @@ namespace ToEachHisOwn.Services.Interfaces
 {
     public interface IJsonDataServices
     {
+        /// <summary>Получает повторное имя базы</summary>
+        string MatchOfNameBase { get; }
         ///<summary>Достаёт ведрённые ресурсы из приложения, сортирует их по ключу.</summary>
         IDictionary<string, string[]> GetDbFromExe();
 

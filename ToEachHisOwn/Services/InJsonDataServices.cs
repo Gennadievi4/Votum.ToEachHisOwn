@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -14,7 +12,10 @@ namespace ToEachHisOwn.Services
     public class InJsonDataServices : IJsonDataServices
     {
         private IDictionary<string, string[]> _DataDict = new Dictionary<string, string[]>();
+        private int _NewNumberKey = 0;
 
+        /// <summary>Получает повторное имя базы</summary>
+        public string MatchOfNameBase { get; private set; }
 
         ///<summary>Достаёт внедрённые ресурсы из приложения, сортирует их по ключу.</summary>  
         public IDictionary<string, string[]> GetDbFromExe()
@@ -34,10 +35,7 @@ namespace ToEachHisOwn.Services
 
             //_DataDict.OrderBy(x => x.Key.Where(x1 => char.IsDigit(x1) && int.Parse(x1.ToString()) > 0)).ToDictionary(x => x.Key, x => x.Value);
 
-            return _DataDict.OrderBy(x => int.TryParse(x.Key.Split(new char[] { '-' }, 2)[0], out int num)
-                ? num.ToString().PadLeft(2, '0')
-                : x.Key)
-                .ToDictionary(x => x.Key, x => x.Value);
+            return SortDic();
 
             //return _DataDict.OrderBy(x => int.TryParse(new string(x.Key.TakeWhile(x1 => char.IsDigit(x1)).ToArray()), out int num)
             //    ? num.ToString().PadLeft(2, '0')
@@ -46,24 +44,45 @@ namespace ToEachHisOwn.Services
         }
 
         ///<summary>Открывает указанный файл десериализуя его в json</summary>
-        public IDictionary<string, string[]> Open(string filename, string filenameWithoutExstension)
+        public IDictionary<string, string[]> Open(string FileName, string FileNameWithoutExstension)
         {
-            var DesSer = JsonConvert.DeserializeObject<string[]>(File.ReadAllText(filename));
+            var DesSer = JsonConvert.DeserializeObject<string[]>(File.ReadAllText(FileName));
 
-            _DataDict.Clear();
-            _DataDict.Add(filenameWithoutExstension, DesSer);
-            _DataDict = GetDbFromExe();
+            if (_DataDict.ContainsKey(FileNameWithoutExstension))
+            {
+                var keys = new List<string>(_DataDict.Keys);
 
-            return _DataDict;
+                keys.Add(FileNameWithoutExstension);
+
+                _NewNumberKey = keys
+                    .GroupBy(x => x)
+                    .Where(x => x.Key.Contains(FileNameWithoutExstension))
+                    .Count();
+
+                _DataDict.Add($"{FileNameWithoutExstension}({_NewNumberKey})", DesSer);
+                MatchOfNameBase = $"{FileNameWithoutExstension}({_NewNumberKey})";
+                return SortDic();
+            }
+
+            _DataDict.Add(FileNameWithoutExstension, DesSer);
+            MatchOfNameBase = $"{FileNameWithoutExstension}";
+            return SortDic();
         }
+
+        /// <summary>Удаляет базу из приложения по её ключу.</summary>
+        /// <param name="key">Ключ базы в словаре баз</param>
+        /// <returns>134</returns>
         public IDictionary<string, string[]> Delete(string key)
         {
             _DataDict.Remove(key);
 
-            return _DataDict.OrderBy(x => int.TryParse(x.Key.Split(new char[] { '-' }, 2)[0], out int num)
+            return SortDic();
+        }
+
+        private IDictionary<string, string[]> SortDic() => _DataDict
+            .OrderBy(x => int.TryParse(x.Key.Split(new char[] { '-' }, 2)[0], out int num)
                 ? num.ToString().PadLeft(2, '0')
                 : x.Key)
                 .ToDictionary(x => x.Key, x => x.Value);
-        }
     }
 }

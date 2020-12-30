@@ -46,8 +46,8 @@ namespace ToEachHisOwn.ViewModels
             if (_Dialog.OpenFileDialog() == true)
             {
                 Data = _JsonServices.Open(_Dialog.FilePath, _Dialog.FileNameWithoutExstension);
-                _Dialog.ShowMessage($"Импорт базы {_Dialog.FileNameWithoutExstension} завершён.");
-                SelectedComboBoxString = _Dialog.FileNameWithoutExstension;
+                _Dialog.ShowMessage($"Импорт базы \"{_Dialog.FileNameWithoutExstension}\" завершён.");
+                SelectedComboBoxString = _JsonServices.MatchOfNameBase;
             }
         });
 
