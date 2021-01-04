@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
+using System.Threading;
 using TestConcole.Properties;
 
 namespace TestConcole
@@ -14,7 +15,7 @@ namespace TestConcole
     class Program
     {
 
-
+        #region Работа с ресурсами
         public static string[] ConvertTxtToJson(string s)
         {
             var db_directory = Directory
@@ -52,29 +53,67 @@ namespace TestConcole
         {
             Console.WriteLine(JsonConvert.DeserializeObject(File.ReadAllText(func("хуй").First())));
         }
+        #endregion
+
+        #region Эксперименты с потоками
+
+        private static bool __CanClockWork = true;
+
+        private static void StartConsoleHeaderClock()
+        {
+            var thread = Thread.CurrentThread;
+            Console.WriteLine($"Запущен поток: id:{thread.ManagedThreadId}, name:{thread.Name}, priority:{thread.Priority}");
+
+            while (__CanClockWork)
+            {
+                Console.Title = DateTime.Now.ToString("G");
+                Thread.Sleep(100);
+            }
+
+            Console.WriteLine("Поток часов завершил свою работу!");
+        }
+        #endregion
 
         static void Main(string[] args)
         {
+            #region Работа с ресурсами
             //DeserializeObjectJson(ConvertTxtToJson);
 
-            var assembly = Assembly.GetExecutingAssembly();
+            //var assembly = Assembly.GetExecutingAssembly();
 
-            var res = Resources.ResourceManager.GetResourceSet(CultureInfo.CurrentCulture, true, true);
+            //var res = Resources.ResourceManager.GetResourceSet(CultureInfo.CurrentCulture, true, true);
 
-            foreach (DictionaryEntry item in res)
-            {
-                //if (item.Value is string str)
-                //    Console.WriteLine($"{item.Key}:{JsonConvert.DeserializeObject(str)}");
-                Console.WriteLine($"{item.Key}");
-            }
+            //foreach (DictionaryEntry item in res)
+            //{
+            //    if (item.Value is string str)
+            //        Console.WriteLine($"{item.Key}:{JsonConvert.DeserializeObject(str)}");
+            //    Console.WriteLine($"{item.Key}");
+            //}
+            #endregion
 
-            //ResourceManager resourceManager = new ResourceManager("Program", assembly);
+            #region Эксперименты с потоками
 
-            //var str = resourceManager.BaseName;
+            var clock_thread = new Thread(StartConsoleHeaderClock);
+            clock_thread.IsBackground = true;
+            clock_thread.Priority = ThreadPriority.AboveNormal;
+            clock_thread.Name = "Поток часов";
 
-            //Console.WriteLine(resourceManager);
+            clock_thread.Start();
+            Console.WriteLine($"Идентификатор потока часов: {clock_thread.ManagedThreadId}");
 
-            Console.WriteLine("That was all!");
+            Console.ReadLine();
+            __CanClockWork = false;
+            //Синхронизация потоков
+            if (!clock_thread.Join(105))
+                clock_thread.Interrupt();
+
+            //StartConsoleHeaderClock();
+
+            Console.WriteLine("Главный поток завершён!");
+            Console.ReadLine();
+            Console.WriteLine("Главный поток выгружен");
+            #endregion
+
 
             Console.ReadKey();
         }
