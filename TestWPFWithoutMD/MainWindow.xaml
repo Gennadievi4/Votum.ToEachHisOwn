@@ -7,8 +7,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <GroupBox Header="Test" VerticalContentAlignment="Center" BorderThickness="2">
-            <List/>
+        <GroupBox Header="Test" 
+                  VerticalContentAlignment="Center" 
+                  BorderThickness="2"
+                  HorizontalContentAlignment="Center">
+            <StackPanel Orientation="Vertical">
+                <TextBox Name="ResultViewer"
+                         BorderBrush="Transparent"
+                         TextAlignment="Center"/>
+                <Button Content="Start"
+                        BorderBrush="Transparent" 
+                        Click="Button_Click"/>
+                <Button Content="Cancel"
+                        BorderBrush="Transparent"
+                        Click="Button_Click_1"/>
+                <ProgressBar Name="ProgressB"
+                             Maximum="1"
+                             Height="20"/>
+            </StackPanel>
         </GroupBox>
     </Grid>
 </Window>
