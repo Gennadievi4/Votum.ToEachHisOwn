@@ -1,8 +1,6 @@
-﻿using System.Windows;
-
-namespace ToEachHisOwn
+﻿namespace ToEachHisOwn.Views
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {

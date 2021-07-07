@@ -1,0 +1,122 @@
+﻿<Window x:Class="ToEachHisOwn.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:l="clr-namespace:ToEachHisOwn.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        
+        DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
+        Title="{Binding Title}"
+        Icon="/Resources/Icons/ico2.png"
+
+        Height="450"
+        Width="800"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="Q" Command="{Binding ClossApp}"/>
+        <KeyBinding Modifiers="Ctrl" Key="O" Command="{Binding OpenFile}"/>
+    </Window.InputBindings>
+    <DockPanel LastChildFill="False">
+        <Menu DockPanel.Dock="Top" 
+              IsMainMenu="True"
+              Name="MainMenu">
+            <MenuItem Header="Файл" 
+                      Height="30">
+                <MenuItem Icon="{materialDesign:PackIcon Kind=OpenInApp}"
+                          Header="Открыть"
+                          InputGestureText="Ctrl+O"
+                          Command="{Binding OpenFile}"
+                          Height="30">
+                </MenuItem>
+                <MenuItem
+                    Icon="{materialDesign:PackIcon Kind=ExitToApp}"
+                    Header="Закрыть"
+                    InputGestureText="Ctrl+Q"
+                    Command="{Binding ClossApp}"
+                    Height="30">
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Справка" 
+                      Height="30">
+                <MenuItem Header="О программе &quot;Каждому своё!&quot;"
+                          Height="30">
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar Band="0" 
+                     BandIndex="0">
+                <ComboBox Style="{StaticResource ComboWithMaterialStyle}"
+                          materialDesign:HintAssist.Hint="Выберите базу:"
+                          ItemsSource="{Binding Data.Keys}"
+                          SelectedValue="{Binding SelectedComboBoxString, Mode=TwoWay}">
+                </ComboBox>
+                <Button Style="{StaticResource StandartButtonStyle}"
+                        ToolTip="Добавить базу"
+                        Command="{Binding OpenFile}">
+                    <Button.Content>
+                        <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
+                                                 Kind="Add"/>
+                    </Button.Content>
+                </Button>
+                <Button Style="{StaticResource StandartButtonStyle}"
+                        ToolTip="Удалить базу"
+                        Command="{Binding DeleteBaseFromApp}"
+                        CommandParameter="{Binding SelectedComboBoxString, Mode=TwoWay}">
+                    <Button.Content>
+                        <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
+                                                 Kind="Delete"/>
+                    </Button.Content>
+                </Button>
+            </ToolBar>
+            <ToolBar Band="0"
+                     BandIndex="1">
+                <Button Style="{StaticResource StandartButtonStyle}"
+                        ToolTip="Показывать на экране пульта ошибку">
+                    <Button.Content>
+                        <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
+                                                 Kind="SmartphoneText"/>
+                    </Button.Content>
+                </Button>
+                <Button Style="{StaticResource StandartButtonStyle}"
+                        ToolTip="Показать рейтинг на экране пульта">
+                    <Button.Content>
+                        <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
+                                                 Kind="SmartphoneInformation"/>
+                    </Button.Content>
+                </Button>
+                <Button Style="{StaticResource StandartButtonStyle}"
+                        ToolTip="Ограничить время ответа">
+                    <Button.Content>
+                        <materialDesign:PackIcon Style="{StaticResource ToolBarIconStyle}"
+                                                 Kind="TimerSand"/>
+                    </Button.Content>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <StatusBar DockPanel.Dock="Bottom"
+                   Height="30"
+                   Background="White"
+                   HorizontalAlignment="Center">
+            <TextBlock Text="Статус бар"/>
+        </StatusBar>
+        <UniformGrid Rows="2" 
+                     Width="{Binding ActualWidth, ElementName=MainMenu}">
+            <GroupBox Header="Участники игры">
+                <TextBlock Text="Тестовый текст"/>
+            </GroupBox>
+            <GroupBox Header="Участник игры №1">
+                <TextBlock Text="Тестовый текст"/>
+            </GroupBox>
+        </UniformGrid>
+    </DockPanel>
+</Window>
